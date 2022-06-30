@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_database/models/transaction.dart';
 import 'package:flutter_basic_database/providers/transaction_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     title: Text(data.title),
-                    subtitle: Text(data.date.toString()),
+                    subtitle: Text(DateFormat("dd/MM/yyyy").format(data.date)),
                   ),
                 );
               }),
