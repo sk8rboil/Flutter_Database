@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_database/homepage.dart';
 import 'package:flutter_basic_database/providers/transaction_provider.dart';
+import 'package:flutter_basic_database/screens/form_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,10 +27,14 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          appBarTheme: AppBarTheme(
+            color: Colors.lightGreen,
+          ),
         ),
         home: const MyHomePage(title: 'Flutter Demo Home Page'),
         routes: {
           '/homepage': (context) => MyHomePage(title: ''),
+          '/formscreen': (context) => FormScreen(),
         },
       ),
     );
