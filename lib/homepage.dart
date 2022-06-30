@@ -31,24 +31,37 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Consumer(
         builder: (context, TransactionProvider provider, child) {
-          return ListView.builder(
-            itemBuilder: ((context, index) {
-              Transaction data = provider.transactions[index];
-              return Card(
-                child: ListTile(
-                  leading: CircleAvatar(
-                    radius: 20,
-                    child: FittedBox(
-                      child: Text(data.amount.toString()),
-                    ),
-                  ),
-                  title: Text(data.title),
-                  subtitle: Text(data.date.toString()),
+          var count = provider.transactions.length;
+          if (count <= 0) {
+            return Center(
+              child: Text(
+                'NO DATA',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-              );
-            }),
-            itemCount: provider.transactions.length,
-          );
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemBuilder: ((context, index) {
+                Transaction data = provider.transactions[index];
+                return Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      child: FittedBox(
+                        child: Text(data.amount.toString()),
+                      ),
+                    ),
+                    title: Text(data.title),
+                    subtitle: Text(data.date.toString()),
+                  ),
+                );
+              }),
+              itemCount: provider.transactions.length,
+            );
+          }
         },
       ),
 
