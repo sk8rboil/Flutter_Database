@@ -8,9 +8,11 @@ class TransactionProvider with ChangeNotifier {
     Transaction(title: 'title3', amount: 300, date: DateTime.now()),
   ];
 
-  List<Transaction> gryTransaction() {
+  List<Transaction> getTransaction() {
     return transactions;
   }
 
-  addTransaction(Transaction statement) {}
+  addTransaction(Transaction statement) {
+    transactions.add(statement);
+  }
 }
