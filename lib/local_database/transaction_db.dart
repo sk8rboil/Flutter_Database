@@ -1,9 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, await_only_futures
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_basic_database/models/transactions.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast/sembast_io.dart';
 
 class TransactionDB {
   String dbName;
@@ -12,11 +15,27 @@ class TransactionDB {
     required this.dbName,
   });
 
-  Future<String> openDatabase() async {
+  Future<Database> openDatabase() async {
     //find database path
     Directory appDirectory = await getApplicationDocumentsDirectory();
     String dbLocation = join(appDirectory.path, dbName);
-    return dbLocation;
+    //create database
+    DatabaseFactory dbFactory = await databaseFactoryIo;
+    Database db = await dbFactory.openDatabase(dbLocation);
+    return db;
+  }
+
+  InsertData(Transactions statement) async {
+    //transaction.db => expense
+    var db = await this.openDatabase();
+    var store = intMapStoreFactory.store("expense");
+
+    //json
+    store.add(db, {
+      "title": statement.title,
+      "amount": statement.amount,
+      "date": statement.date,
+    });
   }
 
   TransactionDB copyWith({

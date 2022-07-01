@@ -12,9 +12,12 @@ class TransactionProvider with ChangeNotifier {
   }
 
   addTransaction(Transactions statement) async {
-    var db = await TransactionDB(dbName: "transaction.db")
-        .openDatabase(); //keep data in db
-    print(db);
+    /*  var db = await TransactionDB(dbName: "transaction.db")
+        .openDatabase(); //keep data location in db
+    print(db); */
+    var db = TransactionDB(dbName: "transaction.db");
+    //บันทึกข้อมูล
+    await db.InsertData(statement);
     transactions.insert(0, statement);
     notifyListeners(); //alert Consumer
   }
