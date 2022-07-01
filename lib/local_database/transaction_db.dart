@@ -1,5 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, await_only_futures
+// ignore_for_file: public_member_api_docs, sort_constructors_first, await_only_futures, unnecessary_this, non_constant_identifier_names, unused_import
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter_basic_database/models/transactions.dart';
@@ -25,18 +26,23 @@ class TransactionDB {
     return db;
   }
 
-  InsertData(Transactions statement) async {
+  Future<int> InsertData(Transactions statement) async {
     //transaction.db => expense
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store("expense");
 
     //json
-    store.add(db, {
+    var keyID = store.add(db, {
       "title": statement.title,
       "amount": statement.amount,
-      "date": statement.date,
+      "date": statement.date.toIso8601String(),
     });
+    db.close();
+    return keyID;
   }
+
+  //ดึงข้อมูล
+  loadAllData() async {}
 
   TransactionDB copyWith({
     String? dbName,
