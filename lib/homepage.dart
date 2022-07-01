@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_database/models/transaction.dart';
+import 'package:flutter_basic_database/models/transactions.dart';
 import 'package:flutter_basic_database/providers/transaction_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           } else {
             return ListView.builder(
               itemBuilder: ((context, index) {
-                Transaction data = provider.transactions[index];
+                Transactions data = provider.transactions[index];
                 return Card(
                   child: ListTile(
                     leading: CircleAvatar(

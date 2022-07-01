@@ -1,23 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class Transaction {
+class Transactions {
   String title;
   double amount;
   DateTime date;
 
-  Transaction({
+  Transactions({
     required this.title,
     required this.amount,
     required this.date,
   });
 
-  Transaction copyWith({
+  Transactions copyWith({
     String? title,
     double? amount,
     DateTime? date,
   }) {
-    return Transaction(
+    return Transactions(
       title: title ?? this.title,
       amount: amount ?? this.amount,
       date: date ?? this.date,
@@ -32,8 +32,8 @@ class Transaction {
     };
   }
 
-  factory Transaction.fromMap(Map<String, dynamic> map) {
-    return Transaction(
+  factory Transactions.fromMap(Map<String, dynamic> map) {
+    return Transactions(
       title: map['title'] as String,
       amount: map['amount'] as double,
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
@@ -42,8 +42,8 @@ class Transaction {
 
   String toJson() => json.encode(toMap());
 
-  factory Transaction.fromJson(String source) =>
-      Transaction.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Transactions.fromJson(String source) =>
+      Transactions.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() =>
@@ -53,7 +53,7 @@ class Transaction {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Transaction &&
+    return other is Transactions &&
         other.title == title &&
         other.amount == amount &&
         other.date == date;

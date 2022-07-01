@@ -1,16 +1,20 @@
-// ignore_for_file: annotate_overrides
+// ignore_for_file: annotate_overrides, avoid_print
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_basic_database/models/transaction.dart';
+import 'package:flutter_basic_database/local_database/transaction_db.dart';
+import 'package:flutter_basic_database/models/transactions.dart';
 
 class TransactionProvider with ChangeNotifier {
-  List<Transaction> transactions = [];
+  List<Transactions> transactions = [];
 
-  List<Transaction> getTransaction() {
+  List<Transactions> getTransaction() {
     return transactions;
   }
 
-  addTransaction(Transaction statement) {
+  addTransaction(Transactions statement) async {
+    var db = await TransactionDB(dbName: "transaction.db")
+        .openDatabase(); //keep data in db
+    print(db);
     transactions.insert(0, statement);
     notifyListeners(); //alert Consumer
   }

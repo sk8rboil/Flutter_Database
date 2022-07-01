@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_database/constant.dart';
-import 'package:flutter_basic_database/models/transaction.dart';
+import 'package:flutter_basic_database/models/transactions.dart';
 import 'package:flutter_basic_database/providers/transaction_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +69,7 @@ class FormScreen extends StatelessWidget {
                           String title = titlecontroller.text;
                           String amount = amountcontroller.text;
 
-                          Transaction statement = Transaction(
+                          Transactions statement = Transactions(
                               title: title,
                               amount: double.parse(amount),
                               date: DateTime.now());
